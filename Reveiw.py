@@ -6,5 +6,7 @@ html = urllib.request.urlopen(url).read()
 soup = BeautifulSoup(html, 'html.parser')
 tags = soup('span')
 for tag in tags:
-    if tag.get('class',[]) == ['nonresponsive_hidden', 'responsive_reviewdesc']:
-        print(tag)
+    raw_info = str(tag)
+    review_info = re.findall('\S+%', raw_info) 
+    review_info += re.findall('\S+,\S+',raw_info)
+    print (review_info)
